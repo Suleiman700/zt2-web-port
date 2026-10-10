@@ -1,0 +1,1073 @@
+{
+  "updated": "2026-10-12T09:00:00+03:00",
+  "now": {
+    "task": "Guests (Phase 5)",
+    "detail": "Guests run the original guest AI. Next: thoughts and inventory in the guest panel, eating and drinking, seating, restrooms, trash, donation boxes."
+  },
+  "milestones": [
+    {
+      "title": "Phase 0: Foundations",
+      "status": "done",
+      "detail": "Game archives, 3D models (.nif and .bfb, 5,374 files), textures, skeletal animations (10,626 files), all 107 animal species animating, object catalog with real names, icons and prices, asset viewer, sandbox, progress page."
+    },
+    {
+      "title": "Phase 1: Terrain and world",
+      "status": "done",
+      "detail": "Original maps with real heights, ground painted the original way, cliffs, water; tools: raise, lower, smooth, flatten, biome paint, add/remove water; all edits saved per map. Still to compare with the original: cliff rock rule, camera controls."
+    },
+    {
+      "title": "Phase 2: Building the zoo",
+      "status": "done",
+      "detail": "Placement rules (grid, footprints, slopes, rotation, overlap); fences of every type and height, the fence drawing tool, gates; paths of every type, path drawing; buildings (food stands, drinks, restrooms, gift shops, shelters); scenery, benches, trash cans, lamps; plants and rocks; selling and demolishing; undo/redo. Left for later after your check: rounded path corners, curved fences, elevated paths."
+    },
+    {
+      "title": "Phase 3: Running the zoo",
+      "status": "done",
+      "detail": "Zoo entrance and parking; opening and closing the zoo; game clock and speeds; admission price; money, finances and the finance panel; fame/zoo rating stars; research and unlocking (Endangered Species); donation boxes; awards. Parts that need guests (admission income, fame changes, front gate upgrades) switch on in Phase 5."
+    },
+    {
+      "title": "Phase 4: Animals",
+      "status": "active",
+      "detail": "Adopting animals; exhibit detection (enclosed by fences); exhibit status (biome match, foliage, rocks, elevation, space, crowding, water); animal needs (hunger, thirst, rest, hygiene, privacy, exercise, social, stimulation); the original behaviors from the .tsk/.beh files (eating, drinking, sleeping, playing, grooming, fighting, hunting, swimming); shelters, food and water containers, enrichment toys; babies and breeding; sickness and recovery; escapes through broken fences; releasing to the wild."
+    },
+    {
+      "title": "Phase 5: Guests",
+      "status": "todo",
+      "detail": "Guests arriving from the entrance; adults, children, teens, elderly; walking the paths; watching animals and viewing areas; children running to playgrounds, toys and animals; needs (hunger, thirst, restroom, energy, fun); buying food and souvenirs; litter; thoughts and complaints; donations; leaving the zoo; guest info panel."
+    },
+    {
+      "title": "Phase 6: Staff",
+      "status": "todo",
+      "detail": "Hiring and firing; zookeepers (feeding, cleaning exhibits, healing); maintenance workers (cleaning litter, fixing fences); educators; tour guides; scientists (Endangered Species); trainers (Marine Mania); work zones; salaries."
+    },
+    {
+      "title": "Phase 7: Transport, tours and shows",
+      "status": "todo",
+      "detail": "Skyfari, elevated tram, jeep tours (African Adventure), boat tours, marine animal shows (Marine Mania), ticket prices."
+    },
+    {
+      "title": "Phase 8: Walk-around modes",
+      "status": "todo",
+      "detail": "Zoo Walk (first person as a guest); ZooKeeper mode (do the keeper jobs yourself); photo mode and camera."
+    },
+    {
+      "title": "Phase 9: Menus and interface",
+      "status": "todo",
+      "detail": "Main menu, map selection, in-game toolbars and build menus, info panels, notifications, options, Zoopedia, saving and loading, all rebuilt from the original UI files."
+    },
+    {
+      "title": "Phase 10: Game modes",
+      "status": "done",
+      "detail": "Original maps with real heights, ground painted the original way, cliffs, water; tools: raise, lower, smooth, flatten, biome paint, add/remove water; all edits saved per map. Still to compare with the original: cliff rock rule, camera controls."
+    },
+    {
+      "title": "Phase 11: Expansion features",
+      "status": "done",
+      "detail": "Original maps with real heights, ground painted the original way, cliffs, water; tools: raise, lower, smooth, flatten, biome paint, add/remove water; all edits saved per map. Still to compare with the original: cliff rock rule, camera controls."
+    },
+    {
+      "title": "Phase 12: Sound and music",
+      "status": "done",
+      "detail": "Original maps with real heights, ground painted the original way, cliffs, water; tools: raise, lower, smooth, flatten, biome paint, add/remove water; all edits saved per map. Still to compare with the original: cliff rock rule, camera controls."
+    },
+    {
+      "title": "Phase 13: Visual polish",
+      "status": "done",
+      "detail": "Original maps with real heights, ground painted the original way, cliffs, water; tools: raise, lower, smooth, flatten, biome paint, add/remove water; all edits saved per map. Still to compare with the original: cliff rock rule, camera controls."
+    },
+    {
+      "title": "Phase 14: Android",
+      "status": "done",
+      "detail": "Original maps with real heights, ground painted the original way, cliffs, water; tools: raise, lower, smooth, flatten, biome paint, add/remove water; all edits saved per map. Still to compare with the original: cliff rock rule, camera controls."
+    }
+  ],
+  "needs": [
+    {
+      "title": "Rounded path corners",
+      "detail": "In the original game, do path corners become rounded on their own when you build an L turn, or only after clicking a corner with the path tool? The game has rounded corner masks (pathcurves.xml) and I want to trigger them the same way."
+    },
+    {
+      "title": "Length of a day",
+      "detail": "In the original game, about how many real minutes does one full day and night take? From the game data I believe one day/night cycle is one in-game month and lasts about 12 minutes. If you remember it differently, tell me."
+    },
+    {
+      "title": "How animals behave",
+      "detail": "When you have time: watch an exhibit in our game and tell me what looks different from the original (how often animals move, eat, sleep, how fast they get hungry)."
+    }
+  ],
+  "log": [
+    {
+      "time": "2026-10-12T09:00:00+03:00",
+      "text": "Guests use the zoo: hungry and thirsty guests buy burgers and sodas at the stands (paying the stand price), then eat and drink standing or sitting on benches; tired guests rest on benches, guests use the restrooms and drop litter. The guest panel shows their thoughts (the game's own lines, such as I can't wait to see some animals) and what they carry."
+    },
+    {
+      "time": "2026-10-12T06:00:00+03:00",
+      "text": "Guests now think with the game's own guest AI. They choose between watching animals, talking with each other, complaining when hungry and buying food: put a food stand near a path and hungry guests walk up to it, pay the stand price and carry their burger away. After watching an exhibit they react the way the original does, from cheering to covering their eyes, and when their departure points run out they walk back to the gate and leave."
+    },
+    {
+      "time": "2026-10-12T04:00:00+03:00",
+      "text": "Guests are here. While the zoo is open they come in through the front gate (by the original guest manager rules), pay admission from their own cash, walk the paths and stop at exhibits to watch the animals, then go home. Each one is one of the game's 15 everyday guest types with a random name and their own clothes, skin and hair. Click a guest for the original guest panel with their needs, cash and what they are doing. When a guest leaves, the zoo fame is worked out with the original formula, so the stars now move."
+    },
+    {
+      "time": "2026-10-12T01:30:00+03:00",
+      "text": "Zoo Status now has its graphs: monthly profit, donations, attendance and fame (in stars), as bars or a line, with the original axis labels. The zoo keeps a monthly record for them from now on."
+    },
+    {
+      "time": "2026-10-12T00:30:00+03:00",
+      "text": "The Zoopedia works: press the Zoopedia (book) button in any info or buy panel. All entries from the game and its expansions are in the contents tree on the left; pages show the original pictures, conservation status, biome and region maps, facts and links to other entries, with back, forward and home buttons. The zoo pauses while it is open."
+    },
+    {
+      "time": "2026-10-11T23:00:00+03:00",
+      "text": "Picking something to build now shows the original buy panel (picture, price, upkeep; for animals biome, home region and conservation status; rotate buttons for objects). Landscaping tools show the original brush size panel with - and + buttons. Animals have the family tree tab (mother, father, grandparents, siblings, mate, children; click one to select it). Build lists show two rows of small icons like the original."
+    },
+    {
+      "time": "2026-10-11T21:00:00+03:00",
+      "text": "The original in-game interface is now the default (no ?shell needed). New: the original Zoo Status window (zoo name, admission price, open or closed, money by category, balance sheet by month, fame bars), the Game Options menu (Save, Load, Return to Main Menu), each biome own water and ground brushes in Landscaping, cliff and ditch tools, and [ ] for the brush size. Build lists no longer offer the rubble of destroyed buildings. The old development menu is still there with ?classic."
+    },
+    {
+      "time": "2026-10-11T18:00:00+03:00",
+      "text": "Click an object in the original interface (?shell) to see its original info panel: animals show their picture, name (you can rename them), need icons coloured by state (green satisfied, yellow pressing, red critical), what they are doing, their biome, home region, conservation status and sex. A follow-camera button, release to the wild and put up for adoption work. Benches, food, plants and buildings get their own panels, and Sell asks with the original confirmation."
+    },
+    {
+      "time": "2026-10-11T16:00:00+03:00",
+      "text": "The main menu now opens when you start the game, over one of the 20 original backdrop pictures. In the local build a refresh brings you back to the zoo you were playing; New zoo starts a fresh zoo at once."
+    },
+    {
+      "time": "2026-10-11T14:00:00+03:00",
+      "text": "The original in-game interface is coming: open localhost:8080/?shell to try it. The bottom-left button panel, Construction, Animals and Landscaping panels with all their tabs and build lists, date bar with pause, fame stars and the cash bar all come from the game own files; picking an animal there and clicking the map adopts it."
+    },
+    {
+      "time": "2026-10-11T12:00:00+03:00",
+      "text": "Save and Load, with the original screens: save your zoo under a name (with a picture), load it later from the game or from the main menu Load/Save button, delete old saves. Saved games stay in this browser."
+    },
+    {
+      "time": "2026-10-11T10:00:00+03:00",
+      "text": "Main menu and map selection, in the original look: the game own layout files are now read and drawn (splash screen, main menu with the paw buttons, Freeform map selection with all maps, map picture, location, biome and size). Open localhost:8080 without ?map= to see it; the Menu button in the top bar brings it back."
+    },
+    {
+      "time": "2026-10-11T08:00:00+03:00",
+      "text": "Emoticons above animals, like the original (your request): the game own emoticon effects play when animals are happy, sick, hungry, mating, pregnant and more. Guests and staff will show theirs too when they arrive."
+    },
+    {
+      "time": "2026-10-11T08:00:00+03:00",
+      "text": "Debug buttons in the animal panel: Make unhappy / Make happy (local mode only), to try escapes and fights quickly."
+    },
+    {
+      "time": "2026-10-11T06:00:00+03:00",
+      "text": "Swimming: animals that swim in the original (polar bears, hippos...) go into deep water, swim and tread water with their head above the surface."
+    },
+    {
+      "time": "2026-10-11T06:00:00+03:00",
+      "text": "Sickness, as in the original: animals living in a dirty exhibit get sick, then very sick (and can pass it on), and die of illness if it goes on; good conditions heal them."
+    },
+    {
+      "time": "2026-10-11T05:00:00+03:00",
+      "text": "Food shows how full it is, like the original: meat dishes, hay and carcasses change from full to two thirds, one third and empty as animals eat."
+    },
+    {
+      "time": "2026-10-11T05:00:00+03:00",
+      "text": "Predators hunt: a lion sharing an exhibit with zebras stalks, chases and kills them; the zebra becomes a carcass the lions eat."
+    },
+    {
+      "time": "2026-10-11T05:00:00+03:00",
+      "text": "Escapes: unhappy animals now smash weak fences (buffalo through chain link), jump low fences (lions) or climb and dig under, with the original messages. A smashed fence shows its broken model and the animals walk out into the zoo."
+    },
+    {
+      "time": "2026-10-11T05:00:00+03:00",
+      "text": "Money: open the game once as localhost:8080/?money=9999999 to set your cash (as you asked)."
+    },
+    {
+      "time": "2026-10-11T03:30:00+03:00",
+      "text": "The city and countryside around the zoo now sit at the same height as the zoo (your screenshot): they were placed 13 m too low, leaving a gap."
+    },
+    {
+      "time": "2026-10-11T03:30:00+03:00",
+      "text": "Female / Male choice when adopting an animal, with the original buttons (Female by default, like the original)."
+    },
+    {
+      "time": "2026-10-11T03:30:00+03:00",
+      "text": "Breeding works with the original tasks and scripts: a female calls a male, they mate, she becomes pregnant and gives birth to 2-3 young; the young grow up into adults later. Parents no longer treat their own young as prey."
+    },
+    {
+      "time": "2026-10-11T03:30:00+03:00",
+      "text": "Animals now leave droppings (they were created but not shown, and stood on edge)."
+    },
+    {
+      "time": "2026-10-11T02:10:00+03:00",
+      "text": "Fixed plants and trees drawn as solid green or dark cards (your screenshots): many materials take their see-through setting from the game effect files (effects/*.fx), which are now read."
+    },
+    {
+      "time": "2026-10-11T01:40:00+03:00",
+      "text": "Shelters were missing from the build menu: all 45 (caves, shade structures, stables, nests, burrows...) are back, plus 26 other objects whose models were not found before. Lions now rest and hide in a shade structure, play with toys and use a scratching post; happy animals unlock more activities, like in the original."
+    },
+    {
+      "time": "2026-10-11T01:00:00+03:00",
+      "text": "Exhibit suitability: each animal now feels its exhibit biome (terrain, plants and rocks, with the species own biome likes and dislikes) and whether there is enough space for the group. Animals and food levels are now kept when you reload."
+    },
+    {
+      "time": "2026-10-11T00:30:00+03:00",
+      "text": "Animals now think like the original: their needs (hunger, thirst, rest, social...) grow over time and they pick tasks from the game own AI files. Lions given a meat dish and a water dish walk over, eat with their real eating animations, drink, then pee and poop; zebras snort, groom, scratch and wander. Click an animal to see what it is doing and its top needs. Also: the sun now crosses the sky, and the camera uses the original field of view."
+    },
+    {
+      "time": "2026-10-10T22:20:00+03:00",
+      "text": "Lighting fix for all objects: glowing (emissive) material colour is now combined like the original Direct3D lighting, so colours are no longer washed out (the front gate elephant is grey, not pink). Scrolling textures (waving flags, flowing effects) now animate."
+    },
+    {
+      "time": "2026-10-10T21:50:00+03:00",
+      "text": "Phase 4 started: exhibits. Fenced areas are detected (straight and diagonal fences, the zoo wall), animals roam their whole exhibit and cannot walk through fences. Click an animal to see its exhibit size."
+    },
+    {
+      "time": "2026-10-10T21:10:00+03:00",
+      "text": "Zoo Status panel (click the stars next to the money): open or close the zoo and set the admission price. Found the original game logic scripts inside the game files and decoded the exact zoo fame formula (animals, species, happiness, education, entertainment, awards); it switches on with guests. Finance labels now match the original."
+    },
+    {
+      "time": "2026-10-10T20:20:00+03:00",
+      "text": "Finances: costs, refunds and monthly upkeep come from each object like the original (selling gives 80% back, not 50%). Click the money to see this and last month. Fixed 16 objects that showed the wrong model (gift shop, restaurant and small bathroom showed only a sign or effect). Objects with states (shop signs, bat cave bats) now show the right part."
+    },
+    {
+      "time": "2026-10-10T19:30:00+03:00",
+      "text": "Game clock with pause (P) and day and night: the original lights and sky dome change through the day, and the landscape around the map (hills, trees) is now shown."
+    },
+    {
+      "time": "2026-10-10T18:40:00+03:00",
+      "text": "New zoos now start like the original map: front gate, zoo wall, parking lot, entrance paths, trees and rocks. Fixed a model reader bug that dropped parts of 321 models (food stands, kiosks, the front gate and more). Models now load faster."
+    },
+    {
+      "time": "2026-10-10T17:25:00+03:00",
+      "text": "Paths now use the original edge masks (north_mask / west_mask), so path edges match the original texel pattern."
+    },
+    {
+      "time": "2026-10-11T02:00:00+03:00",
+      "text": "Undo / Redo (buttons and Ctrl+Z / Ctrl+Y) for placing, selling, fences, gates, paths and terrain edits."
+    },
+    {
+      "time": "2026-10-11T01:40:00+03:00",
+      "text": "Theme versions are now named apart, e.g. Cheesecake Cart (Classic / Jungle / Safari / Desert / Extinct / Endangered)."
+    },
+    {
+      "time": "2026-10-11T01:30:00+03:00",
+      "text": "Expansion models now use their vertex colours and material colours (e.g. the cheesecake display was plain white)."
+    },
+    {
+      "time": "2026-10-11T01:15:00+03:00",
+      "text": "Objects made of several parts: 164 objects (snack carts, photo booth, ...) now show their vendors (animated), signs, umbrellas and goods."
+    },
+    {
+      "time": "2026-10-11T00:45:00+03:00",
+      "text": "Placement rules from each object's ZTPlacementData: footprints, 45° rotation, grid snapping, no overlapping, water/land, ground levelling under buildings, green/red footprint preview."
+    },
+    {
+      "time": "2026-10-10T23:00:00+03:00",
+      "text": "Fix: see-through surfaces (fences, leaves, glass) turned whitish at a distance because the page showed through the canvas. Canvas is now opaque."
+    },
+    {
+      "time": "2026-10-10T22:50:00+03:00",
+      "text": "Original lighting from world/lights (per biome: ambient + sun, side and back lights). Textures now use the game files' own mipmaps."
+    },
+    {
+      "time": "2026-10-10T22:30:00+03:00",
+      "text": "Fences: 60 fence types in a Fences tab; drag from a tile corner to draw straight or diagonal fences; they follow hills; select a segment to sell it."
+    },
+    {
+      "time": "2026-10-10T22:00:00+03:00",
+      "text": "Build menu grew to 778 items (expansion objects in the .bfb format now load)."
+    },
+    {
+      "time": "2026-10-10T21:50:00+03:00",
+      "text": "Water reworked to match the original: a brush that paints shallow or deep water onto the land (depths from each biome). Strength slider added for raise, lower, smooth and flatten."
+    },
+    {
+      "time": "2026-10-10T21:10:00+03:00",
+      "text": "Water tools added: Add water fills a hollow up to its rim, Remove water drains it; water type picked by biome. Phase 1 (terrain) complete."
+    },
+    {
+      "time": "2026-10-10T20:30:00+03:00",
+      "text": "Terrain tools added (Terrain tab): raise, lower, smooth, flatten, biome paint with ground cover. Edits saved per map; New zoo restores the original map."
+    },
+    {
+      "time": "2026-10-10T20:20:00+03:00",
+      "text": "Built an automated play-tester (tools/playtest.mjs) that clicks and drags in a real browser and takes screenshots."
+    },
+    {
+      "time": "2026-10-10T19:10:00+03:00",
+      "text": "Original maps load in the sandbox (map menu at the top). Ground painted with the game's own brush method on the graphics card; water regions shown."
+    },
+    {
+      "time": "2026-10-10T18:50:00+03:00",
+      "text": "All 138 terrain files parse (69 standard maps + scenarios): 0.75 m cells, 16 biomes."
+    },
+    {
+      "time": "2026-10-10T18:40:00+03:00",
+      "text": "Verified in the game data: escapes, attacks on guests, fleeing, rampages and recapture are all defined. Added to the feature list."
+    },
+    {
+      "time": "2026-10-10T18:10:00+03:00",
+      "text": "Wrote the full phase plan (15 phases, in the order a zoo is built)."
+    },
+    {
+      "time": "2026-10-10T18:00:00+03:00",
+      "text": "All 107 animal species now load and animate, including Extinct Animals and Marine Mania (.bfb format decoded; 2,575 models, no errors)."
+    },
+    {
+      "time": "2026-10-10T17:20:00+03:00",
+      "text": "Downloaded the OpenZT2 source (1,666 Rust files) as a read-only reference."
+    },
+    {
+      "time": "2026-10-10T17:15:00+03:00",
+      "text": "Fixed your OpenZT2 install: removed a mismatched 32-bit DLL, installed the official 64-bit MinGW runtime DLLs from MSYS2 (checksums verified, Defender clean)."
+    },
+    {
+      "time": "2026-10-10T16:55:00+03:00",
+      "text": "Ghidra finished: zt.exe game code is encrypted by copy protection. Stopped that route; extracted 9,370 readable strings instead."
+    },
+    {
+      "time": "2026-10-10T16:50:00+03:00",
+      "text": ".bfb geometry verified on all 2,609 files."
+    },
+    {
+      "time": "2026-10-10T16:40:00+03:00",
+      "text": "You approved Ghidra; analysis of zt.exe started."
+    },
+    {
+      "time": "2026-10-10T16:30:00+03:00",
+      "text": "Ghidra Defender scan finished: no threats. Asked you for approval to run it."
+    },
+    {
+      "time": "2026-10-10T16:20:00+03:00",
+      "text": "Started decoding .bfb: 2,609 files, 19 vertex layouts, skeleton bone records identified."
+    },
+    {
+      "time": "2026-10-10T16:05:00+03:00",
+      "text": "74 of 107 species animate correctly in tests. The other 33 use the .bfb model format."
+    },
+    {
+      "time": "2026-10-10T15:50:00+03:00",
+      "text": "Animation playback added: skinning on the graphics card, walk/idle/extra actions, root motion removed so feet do not slide."
+    },
+    {
+      "time": "2026-10-10T15:35:00+03:00",
+      "text": "Verified the skinning formula against every animal model, and the animation units (millimetres, quaternions scaled by 10,000)."
+    },
+    {
+      "time": "2026-10-10T15:20:00+03:00",
+      "text": "Created this progress page."
+    },
+    {
+      "time": "2026-10-10T15:15:00+03:00",
+      "text": "Checked the ZtModArchive repo: contains decompiled game Lua scripts, which are useful. Its .exe tools won't be run (unvetted)."
+    },
+    {
+      "time": "2026-10-10T15:00:00+03:00",
+      "text": "Downloaded Ghidra 12.1.4 from the official GitHub; checksum verified; Defender scan started."
+    },
+    {
+      "time": "2026-10-10T14:50:00+03:00",
+      "text": "Animation format (.bf) decoded and verified against all animation files."
+    },
+    {
+      "time": "2026-10-10T14:30:00+03:00",
+      "text": "Sandbox mode built: map, camera, build menu, placing animals and objects."
+    }
+  ],
+  "rules": [
+    "Each phase is finished and working before the next one starts.",
+    "Everything is checked against the original game, not just OpenZT2.",
+    "Smooth performance on PC and phones is part of every phase: fewer draw calls, level-of-detail models, culling of off-screen objects, loading in the background, lighter textures on phones.",
+    "Every model, animation and data file is tested automatically before you see it."
+  ],
+  "features": [
+    {
+      "area": "Game files and graphics",
+      "feature": "Game archives (.z2f)",
+      "status": "done",
+      "note": "All archives read in the browser"
+    },
+    {
+      "area": "Game files and graphics",
+      "feature": "3D models (.nif)",
+      "status": "done",
+      "note": "2,449 of 2,765 fully; the rest only lack particle effects"
+    },
+    {
+      "area": "Game files and graphics",
+      "feature": "3D models (.bfb, expansions)",
+      "status": "done",
+      "note": "2,575 models, no errors"
+    },
+    {
+      "area": "Game files and graphics",
+      "feature": "Textures (.dds)",
+      "status": "done",
+      "note": "All 5 formats"
+    },
+    {
+      "area": "Game files and graphics",
+      "feature": "Materials (.bfmat)",
+      "status": "partial",
+      "note": "Texture and transparency read; full effects come with the original shaders"
+    },
+    {
+      "area": "Game files and graphics",
+      "feature": "Skeletal animations (.bf)",
+      "status": "done",
+      "note": "All 10,626 files"
+    },
+    {
+      "area": "Game files and graphics",
+      "feature": "Original lighting (world/lights, per biome)",
+      "status": "done",
+      "note": "Ambient + sun, side and back lights for terrain and objects, as in the game files"
+    },
+    {
+      "area": "Game files and graphics",
+      "feature": "Day and night cycle (sky, sun, light changes)",
+      "status": "missing",
+      "note": "Phase 3 (game clock); the light keys per time of day are already read"
+    },
+    {
+      "area": "Game files and graphics",
+      "feature": "Original shader effects (.fx)",
+      "status": "missing",
+      "note": "Phase 13"
+    },
+    {
+      "area": "Game files and graphics",
+      "feature": "Particle effects (dust, splashes, fire)",
+      "status": "missing",
+      "note": "Phase 13"
+    },
+    {
+      "area": "Game files and graphics",
+      "feature": "Shadows",
+      "status": "missing",
+      "note": "Phase 13"
+    },
+    {
+      "area": "Terrain and world",
+      "feature": "Original maps with their terrain",
+      "status": "done",
+      "note": "All 69 standard maps load (138 terrain files tested), heights and hills"
+    },
+    {
+      "area": "Terrain and world",
+      "feature": "Raise / lower / smooth / flatten terrain",
+      "status": "done",
+      "note": "Brush with adjustable size and strength; edits saved per map"
+    },
+    {
+      "area": "Terrain and world",
+      "feature": "Cliffs",
+      "status": "missing",
+      "note": "Phase 1"
+    },
+    {
+      "area": "Terrain and world",
+      "feature": "Ground painted like the original (biome brushes)",
+      "status": "done",
+      "note": "Same brush-stamping method as the game, done on the graphics card"
+    },
+    {
+      "area": "Terrain and world",
+      "feature": "Cliff textures",
+      "status": "partial",
+      "note": "Rock painted on cells steeper than the cliff threshold in world/terrain.xml (1.6 m per metre); needs comparison with the original"
+    },
+    {
+      "area": "Terrain and world",
+      "feature": "Painting biomes with a brush tool",
+      "status": "done",
+      "note": "All map biomes with the original icons; ground cover on or off"
+    },
+    {
+      "area": "Terrain and world",
+      "feature": "Water from the original maps",
+      "status": "partial",
+      "note": "Shown as simple tinted water; the real water shader comes in Phase 13"
+    },
+    {
+      "area": "Terrain and world",
+      "feature": "Water brush: shallow and deep water, remove water",
+      "status": "done",
+      "note": "Paint water onto the land like the original; depths from each biome; water type by biome, incl. salt water"
+    },
+    {
+      "area": "Terrain and world",
+      "feature": "Smooth shorelines and the original water look",
+      "status": "missing",
+      "note": "Phase 13"
+    },
+    {
+      "area": "Terrain and world",
+      "feature": "Aquarium tanks (Marine Mania)",
+      "status": "missing",
+      "note": "Phase 11"
+    },
+    {
+      "area": "Terrain and world",
+      "feature": "Sky and environment",
+      "status": "partial",
+      "note": "Original sky dome blended by time of day, and the landscape around the map (skirts); sun, clouds and fog still to come"
+    },
+    {
+      "area": "Terrain and world",
+      "feature": "Original camera controls",
+      "status": "partial",
+      "note": "Field of view from the original overhead camera; its zoom range (13 to 60-90), speeds and fixed pitch are known from world/cameras/overheadcam.xml and wait for your comparison"
+    },
+    {
+      "area": "Building",
+      "feature": "Build menu with real items, icons, prices",
+      "status": "done",
+      "note": "517 entries from the game data"
+    },
+    {
+      "area": "Building",
+      "feature": "Placing and rotating objects",
+      "status": "done",
+      "note": "Free placement with preview"
+    },
+    {
+      "area": "Building",
+      "feature": "Placement rules (grid, footprint, overlap, water/land)",
+      "status": "done",
+      "note": "From each object ZTPlacementData: 1 m footprint grid, 45 degree rotation, snapping, ground levelling, green/red footprint preview"
+    },
+    {
+      "area": "Building",
+      "feature": "Objects made of several parts (vendors, signs, umbrellas)",
+      "status": "done",
+      "note": "164 objects; parts attach to their nodes; vendors animate"
+    },
+    {
+      "area": "Building",
+      "feature": "Fences of all types, fence drawing tool",
+      "status": "done",
+      "note": "60 fence types; drawn along tile edges and diagonals, posts on corners, follow hills; sell per segment"
+    },
+    {
+      "area": "Building",
+      "feature": "Gates in fences",
+      "status": "done",
+      "note": "Gate tool turns a straight segment into the gate of its fence type (38 gate types); doors shown closed"
+    },
+    {
+      "area": "Building",
+      "feature": "Gates opening for staff",
+      "status": "missing",
+      "note": "Phase 6 (needs staff)"
+    },
+    {
+      "area": "Building",
+      "feature": "Curved fences",
+      "status": "missing",
+      "note": "Phase 2"
+    },
+    {
+      "area": "Building",
+      "feature": "Paths of all types, path tool",
+      "status": "done",
+      "note": "11 path types; drag in 8 directions; diagonals use half tiles; remove tool"
+    },
+    {
+      "area": "Building",
+      "feature": "Path curbs",
+      "status": "done",
+      "note": "Original curb pieces placed automatically along path edges"
+    },
+    {
+      "area": "Building",
+      "feature": "Original soft path edges",
+      "status": "done",
+      "note": "Each path triangle is cut by the original north/west edge masks on the original texel lattice"
+    },
+    {
+      "area": "Building",
+      "feature": "Rounded path corners (pathcurves.xml)",
+      "status": "missing",
+      "note": "Masks found; need to check in the original when corners get rounded (see Needs)"
+    },
+    {
+      "area": "Building",
+      "feature": "Elevated paths and stairs",
+      "status": "missing",
+      "note": "Phase 2"
+    },
+    {
+      "area": "Building",
+      "feature": "Buildings (food, drinks, restrooms, shops, shelters)",
+      "status": "partial",
+      "note": "Placed with their parts and vendors; they work once guests exist (Phase 5)"
+    },
+    {
+      "area": "Building",
+      "feature": "Scenery, benches, trash cans, lamps",
+      "status": "partial",
+      "note": "Can be placed; they do not work yet"
+    },
+    {
+      "area": "Building",
+      "feature": "Plants and rocks",
+      "status": "partial",
+      "note": "Can be placed; biome effects not yet"
+    },
+    {
+      "area": "Building",
+      "feature": "Selling / demolishing",
+      "status": "done",
+      "note": "Refund from each object (80% for most, as in the original recycling credit)"
+    },
+    {
+      "area": "Building",
+      "feature": "Undo / redo",
+      "status": "done",
+      "note": "Buttons and Ctrl+Z / Ctrl+Y for placing, selling, fences, gates, paths and terrain edits (30 steps)"
+    },
+    {
+      "area": "Running the zoo",
+      "feature": "Zoo entrance and parking",
+      "status": "partial",
+      "note": "Each map starts as the original: front gate, zoo wall, parking lot and entrance paths, plants and rocks (read from the map save); gate and wall cannot be sold. Guests come in and go out at the front gate"
+    },
+    {
+      "area": "Running the zoo",
+      "feature": "Front gate upgrades with fame",
+      "status": "missing",
+      "note": "Phase 3; the game has frontgate_fame02 to 05 models"
+    },
+    {
+      "area": "Running the zoo",
+      "feature": "Opening and closing the zoo",
+      "status": "done",
+      "note": "Open or close the zoo in the original Zoo Status window; guests only arrive while it is open"
+    },
+    {
+      "area": "Running the zoo",
+      "feature": "Game clock and pause",
+      "status": "done",
+      "note": "Pause/play (P) like the original, which has no fast forward; one day/night cycle is one month (about 12 minutes, inferred from the game data; please compare)"
+    },
+    {
+      "area": "Running the zoo",
+      "feature": "Day and night",
+      "status": "done",
+      "note": "Original world lights and sky per time of day"
+    },
+    {
+      "area": "Running the zoo",
+      "feature": "Money and finances panel",
+      "status": "partial",
+      "note": "Every cost and refund recorded by category per month; monthly upkeep from each object; finances panel (click the money). The original panel layout comes with the UI phase"
+    },
+    {
+      "area": "Running the zoo",
+      "feature": "Admission price",
+      "status": "partial",
+      "note": "Set in Zoo Status (free, cheap, moderate, expensive); every arriving guest pays it from their own cash (children half) and it shows as admissions income. How the price changes the number of guests is still to come"
+    },
+    {
+      "area": "Running the zoo",
+      "feature": "Zoo rating and fame stars",
+      "status": "partial",
+      "note": "The original fame formula (decoded from the game script ZooFame) now runs each time a guest leaves: number of animals, number of species, animal happiness, guest happiness and what guests have seen. The guest education and entertainment amounts per view are approximate until the guest AI is in"
+    },
+    {
+      "area": "Running the zoo",
+      "feature": "Research and unlocking",
+      "status": "missing",
+      "note": "Phase 3"
+    },
+    {
+      "area": "Running the zoo",
+      "feature": "Donation boxes",
+      "status": "missing",
+      "note": "Phase 3"
+    },
+    {
+      "area": "Running the zoo",
+      "feature": "Awards",
+      "status": "missing",
+      "note": "Phase 3"
+    },
+    {
+      "area": "Animals",
+      "feature": "All animal species (107)",
+      "status": "done",
+      "note": "All load and animate"
+    },
+    {
+      "area": "Animals",
+      "feature": "Walk and idle animations",
+      "status": "done",
+      "note": "Speed matched to the feet"
+    },
+    {
+      "area": "Animals",
+      "feature": "Extra actions (yawn, sniff, roar)",
+      "status": "partial",
+      "note": "Random one-off actions while standing"
+    },
+    {
+      "area": "Animals",
+      "feature": "Adopting animals",
+      "status": "partial",
+      "note": "Placed from the build menu with the original Female / Male choice (Female by default); the original adoption panel comes with the UI phase"
+    },
+    {
+      "area": "Animals",
+      "feature": "Exhibits (enclosed by fences)",
+      "status": "done",
+      "note": "Any area closed by fences or the zoo wall, including diagonal fences; size shown when you click an animal"
+    },
+    {
+      "area": "Animals",
+      "feature": "Exhibit status (biome, foliage, space, crowding)",
+      "status": "partial",
+      "note": "Each species biome preferences and space needs come from the game; how they combine into the rating is approximated (the original formula is in the engine). The exhibit panel comes with the UI phase"
+    },
+    {
+      "area": "Animals",
+      "feature": "Animal needs (hunger, thirst, rest, hygiene, social)",
+      "status": "partial",
+      "note": "All 17 original needs with their start values, thresholds and growth rates per species; how fast they grow per second and the happiness rule are approximated (not in the data)"
+    },
+    {
+      "area": "Animals",
+      "feature": "Original behaviors (eat, drink, sleep, play, fight, hunt, swim)",
+      "status": "partial",
+      "note": "The original 13,228 tasks and 3,239 behavior sets run: animals explore, eat, drink, groom, scratch, rest, pee and more with their own animations. Swimming, carrying objects, fights and family tasks still to come"
+    },
+    {
+      "area": "Animals",
+      "feature": "Shelters, food, water, enrichment toys",
+      "status": "partial",
+      "note": "All 45 shelters are in the build menu now (they were missing). Food and water dishes, shade structures, balls and scratching posts are used by the animals with their original tasks; food shows how full it is (full, two thirds, one third, empty); animals stop at a shelter instead of walking inside it yet"
+    },
+    {
+      "area": "Animals",
+      "feature": "Babies and breeding",
+      "status": "done",
+      "note": "Original chain: a female invites a mate, they mate, she may become pregnant, gives birth to 2 or 3 young after about 7 minutes; mates, mothers and young are remembered; parents look after their young"
+    },
+    {
+      "area": "Animals",
+      "feature": "Growing up, old age, dying",
+      "status": "partial",
+      "note": "Young grow into adults and old animals die using the original tasks; how fast age advances is approximated"
+    },
+    {
+      "area": "Animals",
+      "feature": "Droppings",
+      "status": "done",
+      "note": "Animals poop and pee with the original tasks; droppings stay where they fall (cleaning comes with keepers in Phase 6)"
+    },
+    {
+      "area": "Animals",
+      "feature": "Sickness and healing",
+      "status": "partial",
+      "note": "Original rules: dirty animals (their own droppings) get sick, very sick animals can infect others, and they die if it goes on; good conditions heal them slowly. Vets curing comes in Phase 6; the expansion mystery diseases come later"
+    },
+    {
+      "area": "Animals",
+      "feature": "Escapes through broken fences",
+      "status": "done",
+      "note": "Unhappy animals smash fences as weak as the original allows (fence strength from the game), jump low fences, climb or dig under; the fence shows its broken model and the exhibit opens. Keepers and maintenance workers repairing comes in Phase 6"
+    },
+    {
+      "area": "Animals",
+      "feature": "Escaped predators attack guests and other animals",
+      "status": "partial",
+      "note": "Predators stalk, chase and kill other animals they can reach (prey becomes a carcass they eat); attacking guests comes with guests in Phase 5"
+    },
+    {
+      "area": "Animals",
+      "feature": "Other animals and guests flee and panic",
+      "status": "missing",
+      "note": "Phase 4-5; t_FleePredator, Scared, BeingScared"
+    },
+    {
+      "area": "Animals",
+      "feature": "Dinosaur rampages and tranquilizer guns (Dino Danger)",
+      "status": "missing",
+      "note": "Phase 11; TranquilizedRampage, Sleep_Tranquilized"
+    },
+    {
+      "area": "Animals",
+      "feature": "Recapturing escaped animals",
+      "status": "missing",
+      "note": "Phase 6; InteractEscapedAnimal"
+    },
+    {
+      "area": "Animals",
+      "feature": "Release to the wild",
+      "status": "missing",
+      "note": "Phase 4"
+    },
+    {
+      "area": "Animals",
+      "feature": "Emoticons above animals",
+      "status": "done",
+      "note": "The original emoticon effects (74, from the game particle files) play above animals when their behaviors ask for them: happy, sick, hungry, pregnant, birth and more; guests and staff get theirs in their phases"
+    },
+    {
+      "area": "Animals",
+      "feature": "Animal movement",
+      "status": "partial",
+      "note": "Roam their whole exhibit, stay inside the fences and find their way around objects; swimmers (polar bears...) swim and tread water in deep water; climbing still to come"
+    },
+    {
+      "area": "Guests",
+      "feature": "Guests arriving and leaving",
+      "status": "partial",
+      "note": "Guests arrive at the front gate while the zoo is open, following the original guest manager (at most 30 plus 20 per fame star, a try every 1 to 6 seconds) and pay admission from their cash ($400 to $600). They leave with the original LeaveZoo task once their departure points (100 at arrival) run out: idle moments, bad views and unmet needs use them up"
+    },
+    {
+      "area": "Guests",
+      "feature": "Adults, children, teens, elderly",
+      "status": "partial",
+      "note": "The 15 everyday guest types of the game (men, women, boys, girls), each with a random name from the game lists, the original body and head models and their own clothes, skin and hair from the weighted sets in the game files. Special guests (photographer, rock star, caveman) come with their scenarios"
+    },
+    {
+      "area": "Guests",
+      "feature": "Walking the paths",
+      "status": "partial",
+      "note": "Guests walk only on paths, with the original walk and idle animations, and find their way through the path network"
+    },
+    {
+      "area": "Guests",
+      "feature": "Watching animals, viewing areas",
+      "status": "partial",
+      "note": "Guests run the original viewing task: they pick a path spot next to an exhibit, watch for the time of their view meter, then react with the original reaction set for how good the view was (from covering their eyes and leaving early to cheering), which changes their happiness, departure points and the animals privacy. The view score itself is approximate (the formula is in the engine, not the data)"
+    },
+    {
+      "area": "Guests",
+      "feature": "Children running to playgrounds, toys and animals",
+      "status": "missing",
+      "note": "Phase 5"
+    },
+    {
+      "area": "Guests",
+      "feature": "Guest needs, buying food and souvenirs",
+      "status": "partial",
+      "note": "Guests run the game own guest AI tasks (guest.tsk, ViewAnimal.tsk, food, drinks, gifts...): needs grow at the original rates, hungry guests complain (HungryGuest) and buy at stands in sight (BuyBurger and the like), paying the stand price (cheap, moderate or expensive from the stand file) from their cash into food and drink sales; the item goes into their inventory, then they eat or drink it standing or sitting on a bench (SitBenchEatBurger and the like). Tired guests rest on benches, guests use the restrooms, and they drop litter. Waiting in line, items shown in hand, trash cans and donation boxes are next"
+    },
+    {
+      "area": "Guests",
+      "feature": "Litter",
+      "status": "partial",
+      "note": "Guests drop litter on the paths after eating and drinking (from the game tasks); trash cans and cleaning by staff come next"
+    },
+    {
+      "area": "Guests",
+      "feature": "Thoughts, complaints, guest info panel",
+      "status": "partial",
+      "note": "Click a guest for the original guest info panel: name (you can rename them), picture, needs (happiness, hunger, thirst, rest, bathroom, amusement, from the game guest data), cash and current activity. Thoughts come with the guest AI"
+    },
+    {
+      "area": "Staff",
+      "feature": "Hiring and firing staff",
+      "status": "missing",
+      "note": "Phase 6"
+    },
+    {
+      "area": "Staff",
+      "feature": "Zookeepers (feeding, cleaning exhibits, healing)",
+      "status": "missing",
+      "note": "Phase 6"
+    },
+    {
+      "area": "Staff",
+      "feature": "Maintenance workers (cleaning litter, fixing fences)",
+      "status": "missing",
+      "note": "Phase 6"
+    },
+    {
+      "area": "Staff",
+      "feature": "Educators and tour guides",
+      "status": "missing",
+      "note": "Phase 6"
+    },
+    {
+      "area": "Staff",
+      "feature": "Scientists and trainers",
+      "status": "missing",
+      "note": "Phase 6"
+    },
+    {
+      "area": "Transport, tours and shows",
+      "feature": "Skyfari",
+      "status": "missing",
+      "note": "Phase 7"
+    },
+    {
+      "area": "Transport, tours and shows",
+      "feature": "Elevated tram",
+      "status": "missing",
+      "note": "Phase 7"
+    },
+    {
+      "area": "Transport, tours and shows",
+      "feature": "Jeep tours",
+      "status": "missing",
+      "note": "Phase 7"
+    },
+    {
+      "area": "Transport, tours and shows",
+      "feature": "Boat tours",
+      "status": "missing",
+      "note": "Phase 7"
+    },
+    {
+      "area": "Transport, tours and shows",
+      "feature": "Marine animal shows",
+      "status": "missing",
+      "note": "Phase 7"
+    },
+    {
+      "area": "Walk-around modes",
+      "feature": "Zoo Walk (first person)",
+      "status": "missing",
+      "note": "Phase 8"
+    },
+    {
+      "area": "Walk-around modes",
+      "feature": "ZooKeeper mode",
+      "status": "missing",
+      "note": "Phase 8"
+    },
+    {
+      "area": "Walk-around modes",
+      "feature": "Photo mode",
+      "status": "missing",
+      "note": "Phase 8"
+    },
+    {
+      "area": "Menus and interface",
+      "feature": "Main menu and map selection",
+      "status": "partial",
+      "note": "The original screens, drawn from the game own layout files: splash, main menu (logo, paw buttons, profile), Freeform map selection with all 79 maps, map types, picture, location, biome and size; Play starts the map; the menu opens on start over a random original backdrop picture (in the local build a refresh returns to the current zoo). Still to come: the spinning world globe, Challenge and Campaign screens, Options, Credits"
+    },
+    {
+      "area": "Menus and interface",
+      "feature": "Original in-game toolbars and panels",
+      "status": "partial",
+      "note": "The default interface now: the original bottom-left button panel with Construction, Animals and Landscaping panels and every build list, the male/female toggle, date bar with pause, fame stars, cash bar, camera buttons, undo, view filters and the delete tool. The original info panel for the selected object (animal needs, activity, biome, home region, conservation status, sex, rename, follow camera, release / adoption; food, plants, scenery and buildings with the original sell confirmation). The Zoo Status window (zoo name, admission price, open or closed, money by category, balance sheet, fame bars) and the Game Options menu (save, load, main menu). Landscaping: hills, valleys, cliffs, ditches, smoothing, flattening, and each biome own ground, cover and water brushes; [ and ] change the brush size. The animal family tree (click a relative to select it). The buy panel for the picked item (picture, price, upkeep, biome, home region, conservation status, rotate buttons) and the brush size panel for terrain tools. Build lists show two rows of icons like the original. Zoo Status graphs (monthly profit, donations, attendance, fame; bar or line). Still to come: staff, awards, building list and donation lists (they need guests)"
+    },
+    {
+      "area": "Menus and interface",
+      "feature": "Notifications and messages",
+      "status": "partial",
+      "note": "Short pop-up messages"
+    },
+    {
+      "area": "Menus and interface",
+      "feature": "Options",
+      "status": "missing",
+      "note": "Phase 9 (the in-game Game Options menu works; the settings screen is still to come)"
+    },
+    {
+      "area": "Menus and interface",
+      "feature": "Zoopedia",
+      "status": "done",
+      "note": "The original Zoopedia: every entry of the game and its expansions (1,311 in the contents tree), pages with their pictures, conservation status, biome and region maps, facts and links between entries, back / forward / home; opened from the Zoopedia button of any info or buy panel"
+    },
+    {
+      "area": "Menus and interface",
+      "feature": "Saving and loading zoos",
+      "status": "done",
+      "note": "The original Save and Load screens: named saved games with a picture of the zoo, overwrite and delete confirmations; kept in this browser (plus the automatic save per map)"
+    },
+    {
+      "area": "Game modes",
+      "feature": "Freeform",
+      "status": "partial",
+      "note": "Sandbox only"
+    },
+    {
+      "area": "Game modes",
+      "feature": "Challenge mode",
+      "status": "missing",
+      "note": "Phase 10"
+    },
+    {
+      "area": "Game modes",
+      "feature": "Campaigns and scenarios",
+      "status": "missing",
+      "note": "Phase 10"
+    },
+    {
+      "area": "Game modes",
+      "feature": "Tutorials",
+      "status": "missing",
+      "note": "Phase 10"
+    },
+    {
+      "area": "Expansions",
+      "feature": "Endangered Species",
+      "status": "partial",
+      "note": "Animals and objects load; features in Phase 11"
+    },
+    {
+      "area": "Expansions",
+      "feature": "African Adventure",
+      "status": "partial",
+      "note": "Animals and objects load; jeep tours in Phase 7"
+    },
+    {
+      "area": "Expansions",
+      "feature": "Marine Mania",
+      "status": "partial",
+      "note": "Animals load; tanks and shows in Phases 1, 7, 11"
+    },
+    {
+      "area": "Expansions",
+      "feature": "Extinct Animals",
+      "status": "partial",
+      "note": "Animals load; fossils and research in Phase 11"
+    },
+    {
+      "area": "Expansions",
+      "feature": "Dino Danger",
+      "status": "partial",
+      "note": "Animals load; features in Phase 11"
+    },
+    {
+      "area": "Sound and music",
+      "feature": "Animal sounds",
+      "status": "missing",
+      "note": "Phase 12"
+    },
+    {
+      "area": "Sound and music",
+      "feature": "Guest and ambient sounds",
+      "status": "missing",
+      "note": "Phase 12"
+    },
+    {
+      "area": "Sound and music",
+      "feature": "UI sounds and music",
+      "status": "missing",
+      "note": "Phase 12"
+    },
+    {
+      "area": "Platforms",
+      "feature": "Runs in the browser",
+      "status": "done",
+      "note": "No install, no emulation"
+    },
+    {
+      "area": "Platforms",
+      "feature": "Touch controls",
+      "status": "partial",
+      "note": "Basic pan, pinch, rotate"
+    },
+    {
+      "area": "Platforms",
+      "feature": "Android app",
+      "status": "missing",
+      "note": "Phase 14"
+    }
+  ],
+  "later": [
+    "Compare cliff rock on Savannah Ridge with the original game (skipped for now)."
+  ]
+}

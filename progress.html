@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZT2 Web Progress</title>
+<style>
+  :root { --bg: #f4f1ea; --panel: #fffdf8; --ink: #23201b; --muted: #77705f; --line: #e2dccd; --accent: #2f7d4a; --warn: #b7791f; --todo: #9a9488; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #171a17; --panel: #1f231f; --ink: #ecebe4; --muted: #9a9c90; --line: #333a33; --accent: #6fc28b; --warn: #e0b45f; --todo: #6f7268; }
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.5 system-ui, sans-serif; }
+  main { max-width: 860px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 24px; margin: 0; }
+  .sub { color: var(--muted); font-size: 13px; margin: 2px 0 20px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; margin-bottom: 16px; }
+  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin: 0 0 10px; }
+  #now { border-left: 4px solid var(--accent); }
+  #now .task { font-size: 17px; font-weight: 600; }
+  #now p { margin: 6px 0 0; color: var(--muted); }
+  .bar { height: 8px; background: var(--line); border-radius: 4px; overflow: hidden; margin: 8px 0 4px; }
+  .bar > div { height: 100%; background: var(--accent); }
+  ol.milestones { list-style: none; margin: 0; padding: 0; }
+  ol.milestones li { display: grid; grid-template-columns: 24px 1fr; gap: 8px; padding: 8px 0; border-top: 1px solid var(--line); }
+  ol.milestones li:first-child { border-top: 0; }
+  .dot { width: 14px; height: 14px; border-radius: 50%; margin-top: 4px; border: 2px solid var(--todo); }
+  .done .dot { background: var(--accent); border-color: var(--accent); }
+  .active .dot { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent); }
+  .blocked .dot { border-color: var(--warn); background: var(--warn); }
+  .ms-title { font-weight: 600; }
+  .ms-detail { color: var(--muted); font-size: 13px; }
+  .tag { font-size: 11px; padding: 1px 7px; border-radius: 10px; margin-left: 6px; border: 1px solid var(--line); color: var(--muted); font-weight: 500; }
+  ul.log { margin: 0; padding: 0; list-style: none; }
+  ul.log li { padding: 6px 0; border-top: 1px solid var(--line); font-size: 14px; }
+  ul.log li:first-child { border-top: 0; }
+  ul.log time { color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; margin-right: 8px; }
+  ul.plain { margin: 0; padding-left: 18px; }
+  a { color: var(--accent); }
+  .links { display: flex; gap: 14px; flex-wrap: wrap; font-size: 14px; }
+  .summary { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+  .pill { font-size: 12px; padding: 3px 10px; border-radius: 12px; border: 1px solid var(--line); }
+  .pill b { font-variant-numeric: tabular-nums; }
+  .s-done { color: var(--accent); }
+  .s-partial { color: var(--warn); }
+  .s-missing { color: var(--todo); }
+  .filters { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+  .filters button { font: inherit; font-size: 12px; padding: 4px 10px; border-radius: 12px; border: 1px solid var(--line); background: transparent; color: var(--ink); cursor: pointer; }
+  .filters button.on { background: var(--accent); color: var(--panel); border-color: var(--accent); }
+  table.features { width: 100%; border-collapse: collapse; font-size: 14px; }
+  table.features th { text-align: left; font-size: 12px; color: var(--muted); font-weight: 600; padding: 6px 8px; border-bottom: 1px solid var(--line); }
+  table.features td { padding: 7px 8px; border-top: 1px solid var(--line); vertical-align: top; }
+  table.features tr.area td { background: var(--bg); font-weight: 600; font-size: 13px; }
+  table.features td.status { white-space: nowrap; font-weight: 600; font-size: 13px; }
+  table.features td.note { color: var(--muted); font-size: 13px; }
+  @media (max-width: 600px) { table.features td.note { display: none; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>ZT2 Web: Progress</h1>
+  <div class="sub">Updated <span id="updated">…</span> · refreshes every 15 seconds</div>
+
+  <div class="card" id="now">
+    <h2>Working on now</h2>
+    <div class="task" id="nowTask"></div>
+    <p id="nowDetail"></p>
+  </div>
+
+  <div class="card">
+    <h2>Overall</h2>
+    <div class="bar"><div id="overallBar"></div></div>
+    <div class="ms-detail" id="overallText"></div>
+  </div>
+
+  <div class="card">
+    <h2>Phases</h2>
+    <ol class="milestones" id="milestones"></ol>
+  </div>
+
+  <div class="card">
+    <h2>Original ZT2 vs. our game</h2>
+    <div class="summary" id="featureSummary"></div>
+    <div class="filters" id="featureFilters"></div>
+    <table class="features">
+      <thead><tr><th>Feature in Zoo Tycoon 2</th><th>Our game</th><th>Notes</th></tr></thead>
+      <tbody id="featureRows"></tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Rules for every phase</h2>
+    <ul class="plain" id="rules"></ul>
+  </div>
+
+  <div class="card" id="needsCard">
+    <h2>Waiting on you</h2>
+    <ul class="plain" id="needs"></ul>
+  </div>
+
+  <div class="card">
+    <h2>Recent activity</h2>
+    <ul class="log" id="log"></ul>
+  </div>
+
+  <div class="card">
+    <h2>Try it</h2>
+    <div class="links">
+      <a href="index.html">Sandbox</a>
+      <a href="viewer.html">Model viewer</a>
+    </div>
+  </div>
+</main>
+<script>
+const $ = (id) => document.getElementById(id);
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+
+async function load() {
+  let data;
+  try { data = await (await fetch('progress.json', { cache: 'no-store' })).json(); }
+  catch { $('updated').textContent = 'unavailable (is the dev server running?)'; return; }
+
+  $('updated').textContent = new Date(data.updated).toLocaleString();
+  $('nowTask').textContent = data.now.task;
+  $('nowDetail').textContent = data.now.detail;
+
+  const done = data.milestones.filter((m) => m.status === 'done').length;
+  $('overallBar').style.width = `${Math.round((done / data.milestones.length) * 100)}%`;
+  $('overallText').textContent = `${done} of ${data.milestones.length} phases done`;
+
+  const ms = $('milestones');
+  ms.replaceChildren();
+  for (const m of data.milestones) {
+    const li = el('li', m.status);
+    li.append(el('span', 'dot'));
+    const body = el('div');
+    const title = el('div', 'ms-title', m.title);
+    const label = { done: 'done', active: 'in progress', blocked: 'blocked', todo: 'planned' }[m.status];
+    title.append(el('span', 'tag', label));
+    body.append(title, el('div', 'ms-detail', m.detail));
+    li.append(body);
+    ms.append(li);
+  }
+
+  renderFeatures(data.features ?? []);
+  $('rules').replaceChildren(...(data.rules ?? []).map((r) => el('li', null, r)));
+  $('needsCard').hidden = !data.needs?.length;
+  $('needs').replaceChildren(...(data.needs ?? []).map((n) => el('li', null, n)));
+
+  $('log').replaceChildren(...data.log.slice(0, 25).map((entry) => {
+    const li = el('li');
+    li.append(el('time', null, new Date(entry.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })), entry.text);
+    return li;
+  }));
+}
+const STATUS = { done: '✓ Done', partial: '◐ Partial', missing: '○ Missing' };
+let featureFilter = 'all';
+let lastFeatures = [];
+
+function renderFeatures(features) {
+  lastFeatures = features;
+  const counts = { done: 0, partial: 0, missing: 0 };
+  for (const f of features) counts[f.status]++;
+  $('featureSummary').replaceChildren(...Object.entries(counts).map(([k, n]) => {
+    const pill = el('span', `pill s-${k}`);
+    pill.append(el('b', null, String(n)), ` ${STATUS[k].slice(2).toLowerCase()}`);
+    return pill;
+  }), el('span', 'pill', `${features.length} features in total`));
+
+  $('featureFilters').replaceChildren(...['all', 'done', 'partial', 'missing'].map((k) => {
+    const b = el('button', featureFilter === k ? 'on' : '', k === 'all' ? 'All' : STATUS[k].slice(2));
+    b.onclick = () => { featureFilter = k; renderFeatures(lastFeatures); };
+    return b;
+  }));
+
+  const rows = [];
+  let area = null;
+  for (const f of features) {
+    if (featureFilter !== 'all' && f.status !== featureFilter) continue;
+    if (f.area !== area) {
+      area = f.area;
+      const tr = el('tr', 'area');
+      const td = el('td', null, area);
+      td.colSpan = 3;
+      tr.append(td);
+      rows.push(tr);
+    }
+    const tr = el('tr');
+    tr.append(el('td', null, f.feature), el('td', `status s-${f.status}`, STATUS[f.status]), el('td', 'note', f.note));
+    rows.push(tr);
+  }
+  $('featureRows').replaceChildren(...rows);
+}
+
+load();
+setInterval(load, 15000);
+</script>
+</body>
+</html>

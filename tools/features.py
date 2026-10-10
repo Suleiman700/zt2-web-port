@@ -1,0 +1,160 @@
+# Writes the "original ZT2 vs our game" feature comparison into progress.json.
+# Edit the lists below as features change, then run: python tools/features.py
+import json
+from collections import Counter
+from pathlib import Path
+
+FEATURES = {
+    'Game files and graphics': [
+        ('Game archives (.z2f)', 'done', 'All archives read in the browser'),
+        ('3D models (.nif)', 'done', '2,449 of 2,765 fully; the rest only lack particle effects'),
+        ('3D models (.bfb, expansions)', 'done', '2,575 models, no errors'),
+        ('Textures (.dds)', 'done', 'All 5 formats'),
+        ('Materials (.bfmat)', 'partial', 'Texture and transparency read; full effects come with the original shaders'),
+        ('Skeletal animations (.bf)', 'done', 'All 10,626 files'),
+        ('Original lighting (world/lights, per biome)', 'done', 'Ambient + sun, side and back lights for terrain and objects, as in the game files'),
+        ('Day and night cycle (sky, sun, light changes)', 'missing', 'Phase 3 (game clock); the light keys per time of day are already read'),
+        ('Original shader effects (.fx)', 'missing', 'Phase 13'),
+        ('Particle effects (dust, splashes, fire)', 'missing', 'Phase 13'),
+        ('Shadows', 'missing', 'Phase 13'),
+    ],
+    'Terrain and world': [
+        ('Original maps with their terrain', 'done', 'All 69 standard maps load (138 terrain files tested), heights and hills'),
+        ('Raise / lower / smooth / flatten terrain', 'done', 'Brush with adjustable size and strength; edits saved per map'),
+        ('Cliffs', 'missing', 'Phase 1'),
+        ('Ground painted like the original (biome brushes)', 'done', 'Same brush-stamping method as the game, done on the graphics card'),
+        ('Cliff textures', 'partial', 'Rock painted on cells steeper than the cliff threshold in world/terrain.xml (1.6 m per metre); needs comparison with the original'),
+        ('Painting biomes with a brush tool', 'done', 'All map biomes with the original icons; ground cover on or off'),
+        ('Water from the original maps', 'partial', 'Shown as simple tinted water; the real water shader comes in Phase 13'),
+        ('Water brush: shallow and deep water, remove water', 'done', 'Paint water onto the land like the original; depths from each biome; water type by biome, incl. salt water'),
+        ('Smooth shorelines and the original water look', 'missing', 'Phase 13'),
+        ('Aquarium tanks (Marine Mania)', 'missing', 'Phase 11'),
+        ('Sky and environment', 'partial', 'Original sky dome blended by time of day, and the landscape around the map (skirts); sun, clouds and fog still to come'),
+        ('Original camera controls', 'partial', 'Field of view from the original overhead camera; its zoom range (13 to 60-90), speeds and fixed pitch are known from world/cameras/overheadcam.xml and wait for your comparison'),
+    ],
+    'Building': [
+        ('Build menu with real items, icons, prices', 'done', '517 entries from the game data'),
+        ('Placing and rotating objects', 'done', 'Free placement with preview'),
+        ('Placement rules (grid, footprint, overlap, water/land)', 'done', 'From each object ZTPlacementData: 1 m footprint grid, 45 degree rotation, snapping, ground levelling, green/red footprint preview'),
+        ('Objects made of several parts (vendors, signs, umbrellas)', 'done', '164 objects; parts attach to their nodes; vendors animate'),
+        ('Fences of all types, fence drawing tool', 'done', '60 fence types; drawn along tile edges and diagonals, posts on corners, follow hills; sell per segment'),
+        ('Gates in fences', 'done', 'Gate tool turns a straight segment into the gate of its fence type (38 gate types); doors shown closed'),
+        ('Gates opening for staff', 'missing', 'Phase 6 (needs staff)'),
+        ('Curved fences', 'missing', 'Phase 2'),
+        ('Paths of all types, path tool', 'done', '11 path types; drag in 8 directions; diagonals use half tiles; remove tool'),
+        ('Path curbs', 'done', 'Original curb pieces placed automatically along path edges'),
+        ('Original soft path edges', 'done', 'Each path triangle is cut by the original north/west edge masks on the original texel lattice'),
+        ('Rounded path corners (pathcurves.xml)', 'missing', 'Masks found; need to check in the original when corners get rounded (see Needs)'),
+        ('Elevated paths and stairs', 'missing', 'Phase 2'),
+        ('Buildings (food, drinks, restrooms, shops, shelters)', 'partial', 'Placed with their parts and vendors; they work once guests exist (Phase 5)'),
+        ('Scenery, benches, trash cans, lamps', 'partial', 'Can be placed; they do not work yet'),
+        ('Plants and rocks', 'partial', 'Can be placed; biome effects not yet'),
+        ('Selling / demolishing', 'done', 'Refund from each object (80% for most, as in the original recycling credit)'),
+        ('Undo / redo', 'done', 'Buttons and Ctrl+Z / Ctrl+Y for placing, selling, fences, gates, paths and terrain edits (30 steps)'),
+    ],
+    'Running the zoo': [
+        ('Zoo entrance and parking', 'partial', 'Each map starts as the original: front gate, zoo wall, parking lot and entrance paths, plants and rocks (read from the map save); gate and wall cannot be sold. Guests come in and go out at the front gate'),
+        ('Front gate upgrades with fame', 'missing', 'Phase 3; the game has frontgate_fame02 to 05 models'),
+        ('Opening and closing the zoo', 'done', 'Open or close the zoo in the original Zoo Status window; guests only arrive while it is open'),
+        ('Game clock and pause', 'done', 'Pause/play (P) like the original, which has no fast forward; one day/night cycle is one month (about 12 minutes, inferred from the game data; please compare)'),
+        ('Day and night', 'done', 'Original world lights and sky per time of day'),
+        ('Money and finances panel', 'partial', 'Every cost and refund recorded by category per month; monthly upkeep from each object; finances panel (click the money). The original panel layout comes with the UI phase'),
+        ('Admission price', 'partial', 'Set in Zoo Status (free, cheap, moderate, expensive); every arriving guest pays it from their own cash (children half) and it shows as admissions income. How the price changes the number of guests is still to come'),
+        ('Zoo rating and fame stars', 'partial', 'The original fame formula (decoded from the game script ZooFame) now runs each time a guest leaves: number of animals, number of species, animal happiness, guest happiness and what guests have seen. The guest education and entertainment amounts per view are approximate until the guest AI is in'),
+        ('Research and unlocking', 'missing', 'Phase 3'),
+        ('Donation boxes', 'missing', 'Phase 3'),
+        ('Awards', 'missing', 'Phase 3'),
+    ],
+    'Animals': [
+        ('All animal species (107)', 'done', 'All load and animate'),
+        ('Walk and idle animations', 'done', 'Speed matched to the feet'),
+        ('Extra actions (yawn, sniff, roar)', 'partial', 'Random one-off actions while standing'),
+        ('Adopting animals', 'partial', 'Placed from the build menu with the original Female / Male choice (Female by default); the original adoption panel comes with the UI phase'),
+        ('Exhibits (enclosed by fences)', 'done', 'Any area closed by fences or the zoo wall, including diagonal fences; size shown when you click an animal'),
+        ('Exhibit status (biome, foliage, space, crowding)', 'partial', 'Each species biome preferences and space needs come from the game; how they combine into the rating is approximated (the original formula is in the engine). The exhibit panel comes with the UI phase'),
+        ('Animal needs (hunger, thirst, rest, hygiene, social)', 'partial', 'All 17 original needs with their start values, thresholds and growth rates per species; how fast they grow per second and the happiness rule are approximated (not in the data)'),
+        ('Original behaviors (eat, drink, sleep, play, fight, hunt, swim)', 'partial', 'The original 13,228 tasks and 3,239 behavior sets run: animals explore, eat, drink, groom, scratch, rest, pee and more with their own animations. Swimming, carrying objects, fights and family tasks still to come'),
+        ('Shelters, food, water, enrichment toys', 'partial', 'All 45 shelters are in the build menu now (they were missing). Food and water dishes, shade structures, balls and scratching posts are used by the animals with their original tasks; food shows how full it is (full, two thirds, one third, empty); animals stop at a shelter instead of walking inside it yet'),
+        ('Babies and breeding', 'done', 'Original chain: a female invites a mate, they mate, she may become pregnant, gives birth to 2 or 3 young after about 7 minutes; mates, mothers and young are remembered; parents look after their young'),
+        ('Growing up, old age, dying', 'partial', 'Young grow into adults and old animals die using the original tasks; how fast age advances is approximated'),
+        ('Droppings', 'done', 'Animals poop and pee with the original tasks; droppings stay where they fall (cleaning comes with keepers in Phase 6)'),
+        ('Sickness and healing', 'partial', 'Original rules: dirty animals (their own droppings) get sick, very sick animals can infect others, and they die if it goes on; good conditions heal them slowly. Vets curing comes in Phase 6; the expansion mystery diseases come later'),
+        ('Escapes through broken fences', 'done', 'Unhappy animals smash fences as weak as the original allows (fence strength from the game), jump low fences, climb or dig under; the fence shows its broken model and the exhibit opens. Keepers and maintenance workers repairing comes in Phase 6'),
+        ('Escaped predators attack guests and other animals', 'partial', 'Predators stalk, chase and kill other animals they can reach (prey becomes a carcass they eat); attacking guests comes with guests in Phase 5'),
+        ('Other animals and guests flee and panic', 'missing', 'Phase 4-5; t_FleePredator, Scared, BeingScared'),
+        ('Dinosaur rampages and tranquilizer guns (Dino Danger)', 'missing', 'Phase 11; TranquilizedRampage, Sleep_Tranquilized'),
+        ('Recapturing escaped animals', 'missing', 'Phase 6; InteractEscapedAnimal'),
+        ('Release to the wild', 'missing', 'Phase 4'),
+        ('Emoticons above animals', 'done', 'The original emoticon effects (74, from the game particle files) play above animals when their behaviors ask for them: happy, sick, hungry, pregnant, birth and more; guests and staff get theirs in their phases'),
+        ('Animal movement', 'partial', 'Roam their whole exhibit, stay inside the fences and find their way around objects; swimmers (polar bears...) swim and tread water in deep water; climbing still to come'),
+    ],
+    'Guests': [
+        ('Guests arriving and leaving', 'partial', 'Guests arrive at the front gate while the zoo is open, following the original guest manager (at most 30 plus 20 per fame star, a try every 1 to 6 seconds) and pay admission from their cash ($400 to $600). They leave with the original LeaveZoo task once their departure points (100 at arrival) run out: idle moments, bad views and unmet needs use them up'),
+        ('Adults, children, teens, elderly', 'partial', 'The 15 everyday guest types of the game (men, women, boys, girls), each with a random name from the game lists, the original body and head models and their own clothes, skin and hair from the weighted sets in the game files. Special guests (photographer, rock star, caveman) come with their scenarios'),
+        ('Walking the paths', 'partial', 'Guests walk only on paths, with the original walk and idle animations, and find their way through the path network'),
+        ('Watching animals, viewing areas', 'partial', 'Guests run the original viewing task: they pick a path spot next to an exhibit, watch for the time of their view meter, then react with the original reaction set for how good the view was (from covering their eyes and leaving early to cheering), which changes their happiness, departure points and the animals privacy. The view score itself is approximate (the formula is in the engine, not the data)'),
+        ('Children running to playgrounds, toys and animals', 'missing', 'Phase 5'),
+        ('Guest needs, buying food and souvenirs', 'partial', 'Guests run the game own guest AI tasks (guest.tsk, ViewAnimal.tsk, food, drinks, gifts...): needs grow at the original rates, hungry guests complain (HungryGuest) and buy at stands in sight (BuyBurger and the like), paying the stand price (cheap, moderate or expensive from the stand file) from their cash into food and drink sales; the item goes into their inventory, then they eat or drink it standing or sitting on a bench (SitBenchEatBurger and the like). Tired guests rest on benches, guests use the restrooms, and they drop litter. Waiting in line, items shown in hand, trash cans and donation boxes are next'),
+        ('Litter', 'partial', 'Guests drop litter on the paths after eating and drinking (from the game tasks); trash cans and cleaning by staff come next'),
+        ('Thoughts, complaints, guest info panel', 'partial', 'Click a guest for the original guest info panel: name (you can rename them), picture, needs (happiness, hunger, thirst, rest, bathroom, amusement, from the game guest data), cash and current activity. Thoughts come with the guest AI'),
+    ],
+    'Staff': [
+        ('Hiring and firing staff', 'missing', 'Phase 6'),
+        ('Zookeepers (feeding, cleaning exhibits, healing)', 'missing', 'Phase 6'),
+        ('Maintenance workers (cleaning litter, fixing fences)', 'missing', 'Phase 6'),
+        ('Educators and tour guides', 'missing', 'Phase 6'),
+        ('Scientists and trainers', 'missing', 'Phase 6'),
+    ],
+    'Transport, tours and shows': [
+        ('Skyfari', 'missing', 'Phase 7'),
+        ('Elevated tram', 'missing', 'Phase 7'),
+        ('Jeep tours', 'missing', 'Phase 7'),
+        ('Boat tours', 'missing', 'Phase 7'),
+        ('Marine animal shows', 'missing', 'Phase 7'),
+    ],
+    'Walk-around modes': [
+        ('Zoo Walk (first person)', 'missing', 'Phase 8'),
+        ('ZooKeeper mode', 'missing', 'Phase 8'),
+        ('Photo mode', 'missing', 'Phase 8'),
+    ],
+    'Menus and interface': [
+        ('Main menu and map selection', 'partial', 'The original screens, drawn from the game own layout files: splash, main menu (logo, paw buttons, profile), Freeform map selection with all 79 maps, map types, picture, location, biome and size; Play starts the map; the menu opens on start over a random original backdrop picture (in the local build a refresh returns to the current zoo). Still to come: the spinning world globe, Challenge and Campaign screens, Options, Credits'),
+        ('Original in-game toolbars and panels', 'partial', 'The default interface now: the original bottom-left button panel with Construction, Animals and Landscaping panels and every build list, the male/female toggle, date bar with pause, fame stars, cash bar, camera buttons, undo, view filters and the delete tool. The original info panel for the selected object (animal needs, activity, biome, home region, conservation status, sex, rename, follow camera, release / adoption; food, plants, scenery and buildings with the original sell confirmation). The Zoo Status window (zoo name, admission price, open or closed, money by category, balance sheet, fame bars) and the Game Options menu (save, load, main menu). Landscaping: hills, valleys, cliffs, ditches, smoothing, flattening, and each biome own ground, cover and water brushes; [ and ] change the brush size. The animal family tree (click a relative to select it). The buy panel for the picked item (picture, price, upkeep, biome, home region, conservation status, rotate buttons) and the brush size panel for terrain tools. Build lists show two rows of icons like the original. Zoo Status graphs (monthly profit, donations, attendance, fame; bar or line). Still to come: staff, awards, building list and donation lists (they need guests)'),
+        ('Notifications and messages', 'partial', 'Short pop-up messages'),
+        ('Options', 'missing', 'Phase 9 (the in-game Game Options menu works; the settings screen is still to come)'),
+        ('Zoopedia', 'done', 'The original Zoopedia: every entry of the game and its expansions (1,311 in the contents tree), pages with their pictures, conservation status, biome and region maps, facts and links between entries, back / forward / home; opened from the Zoopedia button of any info or buy panel'),
+        ('Saving and loading zoos', 'done', 'The original Save and Load screens: named saved games with a picture of the zoo, overwrite and delete confirmations; kept in this browser (plus the automatic save per map)'),
+    ],
+    'Game modes': [
+        ('Freeform', 'partial', 'Sandbox only'),
+        ('Challenge mode', 'missing', 'Phase 10'),
+        ('Campaigns and scenarios', 'missing', 'Phase 10'),
+        ('Tutorials', 'missing', 'Phase 10'),
+    ],
+    'Expansions': [
+        ('Endangered Species', 'partial', 'Animals and objects load; features in Phase 11'),
+        ('African Adventure', 'partial', 'Animals and objects load; jeep tours in Phase 7'),
+        ('Marine Mania', 'partial', 'Animals load; tanks and shows in Phases 1, 7, 11'),
+        ('Extinct Animals', 'partial', 'Animals load; fossils and research in Phase 11'),
+        ('Dino Danger', 'partial', 'Animals load; features in Phase 11'),
+    ],
+    'Sound and music': [
+        ('Animal sounds', 'missing', 'Phase 12'),
+        ('Guest and ambient sounds', 'missing', 'Phase 12'),
+        ('UI sounds and music', 'missing', 'Phase 12'),
+    ],
+    'Platforms': [
+        ('Runs in the browser', 'done', 'No install, no emulation'),
+        ('Touch controls', 'partial', 'Basic pan, pinch, rotate'),
+        ('Android app', 'missing', 'Phase 14'),
+    ],
+}
+
+path = Path(__file__).resolve().parent.parent / 'progress.json'
+data = json.loads(path.read_text(encoding='utf-8'))
+data['features'] = [
+    {'area': area, 'feature': name, 'status': status, 'note': note}
+    for area, items in FEATURES.items() for name, status, note in items
+]
+path.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding='utf-8')
+print(len(data['features']), dict(Counter(f['status'] for f in data['features'])))
